@@ -1,0 +1,36 @@
+/* Block: hero-section */
+.heroSection {
+    text-align: center;
+    background: #f0f8ff;
+    padding: 50px;
+}
+
+/* Element: title */
+.heroSectionTitle {
+    font-size: 3rem;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+/* Element: description */
+.heroSectionDescription {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Element: cta-button */
+.heroSectionCtaButton {
+    background-color: #7ed321;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.heroSectionCtaButton:hover {
+    background-color: #5ba616;
+}
