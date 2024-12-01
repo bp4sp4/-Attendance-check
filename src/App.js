@@ -1,10 +1,10 @@
-import "./App.css";
-import HeroSection from "./components/main/main";
+import AppRouter from "./components/router";
+import React from "react";
 
 function App() {
   return (
     <div className="App">
-      <HeroSection />
+      <AppRouter />
     </div>
   );
 }

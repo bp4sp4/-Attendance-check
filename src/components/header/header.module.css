@@ -1,0 +1,31 @@
+.header {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+
+}
+
+.header__wrap {
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    max-width: 58.625rem;
+    padding: 1rem 0px 0.5rem;
+    margin: 0px auto;
+}
+
+.header__wrap a {
+    text-decoration: none;
+    font-size: 21px;
+}
+
+.header__wrap .header__list {
+    display: flex;
+    gap: 3rem;
+
+}

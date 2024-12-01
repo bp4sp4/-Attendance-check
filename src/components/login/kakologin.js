@@ -58,7 +58,6 @@ const KakaoLogin = () => {
       ) : (
         <div>
           <p>환영합니다, {userInfo.kakao_account.profile.nickname}님!</p>{" "}
-          {/* nickname 위치 수정 */}
           <button onClick={handleKakaoLogout}>카카오로 로그아웃</button>
         </div>
       )}

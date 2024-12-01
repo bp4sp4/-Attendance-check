@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styles from "./HeroSection.module.css";
-import KakaoLogin from "../login/kakologin";
+import styles from "./main.module.css";
+
+import Header from "../header/header";
 
 const HeroSection = () => {
   const [attendanceStatus, setAttendanceStatus] = useState("");
@@ -29,12 +30,8 @@ const HeroSection = () => {
   };
 
   return (
-    <div className={styles.heroSection}>
-      <KakaoLogin />
-      <h1 className={styles.heroSectionTitle}>출석Check!</h1>
-      <p className={styles.heroSectionDescription}>
-        오늘의 학습을 기록하고, 꾸준함을 확인하세요.
-      </p>
+    <div className={styles.main__wrap}>
+      <Header />
       <button
         className={styles.heroSectionCtaButton}
         onClick={handleAttendance}
