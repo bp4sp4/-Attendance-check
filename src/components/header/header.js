@@ -6,16 +6,21 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.header__wrap}>
-        <a href="{() => false}">
-          <Link to="/">출석Check!</Link>
-        </a>
+        <Link to="/" className={styles.logo}>
+          출석Check!
+        </Link>
         <nav>
           <ul className={styles.header__list}>
             <li>
-              <Link to="/signup">회원가입</Link>
+              <Link to="/record">기록보기</Link>
             </li>
             <li>
-              <Link to="/login">로그인</Link>
+              <Link to="/ranking">랭킹</Link>
+            </li>
+            <li>
+              <Link to="/login" className={styles.loginbtn}>
+                회원가입/로그인
+              </Link>
             </li>
           </ul>
         </nav>
