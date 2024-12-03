@@ -5,8 +5,33 @@ import Header from "../header/header";
 const Main = () => {
   const [attendanceStatus, setAttendanceStatus] = useState("");
   const [grass, setGrass] = useState(Array(30).fill(false)); // 잔디 상태
+  const [visibleSections, setVisibleSections] = useState(Array(3).fill(false)); // 3개의 섹션을 초기화
+  const [loginStatus, setLoginStatus] = useState({
+    loggedIn: false,
+    nickName: "",
+  }); // 로그인 상태
   const sectionsRef = useRef([]);
 
+  // 로그인 상태 확인
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/user/logincheck"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setLoginStatus(data);
+        }
+      } catch (error) {
+        console.error("Error fetching login status:", error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  // IntersectionObserver 설정
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -21,24 +46,21 @@ const Main = () => {
           }
         });
       },
-      {
-        threshold: 0.25, // 섹션의 25%가 보일 때 트리거
-      }
+      { threshold: 0.25 }
     );
 
-    const sections = sectionsRef.current;
-
-    sections.forEach((section) => {
+    sectionsRef.current.forEach((section) => {
       if (section) observer.observe(section);
     });
 
     return () => {
-      sections.forEach((section) => {
+      sectionsRef.current.forEach((section) => {
         if (section) observer.unobserve(section);
       });
     };
   }, []);
 
+  // 출석하기 처리 함수
   const handleAttendance = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/attend", {
@@ -47,14 +69,15 @@ const Main = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: "user123", // 실제 로그인된 사용자 ID로 대체
+          userId: loginStatus.nickName || "user123", // 로그인된 사용자 ID로 대체
         }),
       });
 
       if (response.ok) {
         setGrass((prev) => {
-          const updated = [...prev];
-          updated[updated.findIndex((g) => !g)] = true;
+          const updated = prev.map((g, idx) =>
+            idx === prev.findIndex((g) => !g) ? true : g
+          );
           return updated;
         });
         setAttendanceStatus("🌱 출석이 성공적으로 기록되었습니다!");
@@ -67,14 +90,22 @@ const Main = () => {
     }
   };
 
-  const [visibleSections, setVisibleSections] = useState(
-    Array(3).fill(false) // 3개의 섹션을 초기화
-  );
-
   return (
     <div className={styles.main__wrap}>
       <Header />
       {/* 큰 출석하기 섹션 */}
+      <section className={styles.videoSection}>
+        <div className={styles.textContainer}>
+          <h2>잔디를 매일매일 심어보세요~ 🌱</h2>
+          <p>출석을 통해 하루하루 잔디를 채워가며 성실함을 기록하세요.</p>
+        </div>
+        <video autoPlay loop muted className={styles.video}>
+          <source src="/video/grass.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </section>
+
+      {/* 출석 섹션 */}
       <section
         ref={(el) => (sectionsRef.current[0] = el)}
         className={`${styles.largeSection} ${
