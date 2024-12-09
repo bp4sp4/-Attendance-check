@@ -12,7 +12,6 @@ const Main = () => {
   }); // 로그인 상태
   const sectionsRef = useRef([]);
 
-  // 로그인 상태 확인
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -60,7 +59,6 @@ const Main = () => {
     };
   }, []);
 
-  // 출석하기 처리 함수
   const handleAttendance = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/attend", {
@@ -69,7 +67,7 @@ const Main = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: loginStatus.nickName || "user123", // 로그인된 사용자 ID로 대체
+          userId: loginStatus.nickName,
         }),
       });
 

@@ -1,10 +1,13 @@
-import AppRouter from "./components/router";
 import React from "react";
+import AppRouter from "./components/router";
+import { LoginProvider } from "./components/login/LoginContext";
 
 function App() {
   return (
     <div className="App">
-      <AppRouter />
+      <LoginProvider>
+        <AppRouter />
+      </LoginProvider>
     </div>
   );
 }
